@@ -14,20 +14,6 @@ public class AlgorithmReducer extends Reducer<Text, Node, Text, Node> {
         double dampingFactor = context.getConfiguration().getDouble("damp", 0.85);
         double contributions = 0.0;
         Node primary = new Node(true);
-//
-//        for (Node val : values) {
-//            if(val.isProcessing()) {
-//                primary = val ;
-//                continue;
-//            }
-//            contributions += val.getRank();
-//            context.write(key,val);
-//        }
-//
-//        //Compute new page rank
-//        double pageRank = (1.0 - dampingFactor) + (dampingFactor * contributions);
-//        primary.setRank(pageRank)
-//        context.write(key, primary);
 
         for (Node val : values) {
             if (val.isProcessing()) {
@@ -36,6 +22,7 @@ public class AlgorithmReducer extends Reducer<Text, Node, Text, Node> {
             }
             contributions += val.getRank();
         }
+        //Compute new page rank
         double pageRank = (1.0 - dampingFactor) + (dampingFactor * contributions);
         primary.setRank(pageRank);
         context.write(key,primary);
