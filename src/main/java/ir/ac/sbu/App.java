@@ -2,9 +2,11 @@ package ir.ac.sbu;
 
 import ir.ac.sbu.mapper.AlgorithmMapper;
 import ir.ac.sbu.mapper.MapEdges;
+import ir.ac.sbu.mapper.ReporterMap;
 import ir.ac.sbu.mapper.SortMapper;
 import ir.ac.sbu.reducer.AlgorithmReducer;
 import ir.ac.sbu.reducer.PreReducer;
+import ir.ac.sbu.reducer.ReporterReduce;
 import ir.ac.sbu.reducer.SortReducer;
 import ir.ac.sbu.types.Node;
 import org.apache.hadoop.conf.Configuration;
@@ -83,9 +85,9 @@ public class App {
             System.exit(1);
 
         Job reporter = Job.getInstance(conf, "pagerank-Reporter");
-        reporter.setMapperClass(SortMapper.class);
-        //reporter.setCombinerClass(SortReducer.class);
-        reporter.setReducerClass(SortReducer.class);
+        reporter.setMapperClass(ReporterMap.class);
+        //reporter.setCombinerClass(ReporterReduce.class);
+        reporter.setReducerClass(ReporterReduce.class);
         reporter.setInputFormatClass(SequenceFileInputFormat.class);
         reporter.setOutputKeyClass(Text.class);
         reporter.setOutputValueClass(Text.class);
