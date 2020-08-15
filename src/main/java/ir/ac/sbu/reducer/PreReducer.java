@@ -10,7 +10,7 @@ public class PreReducer extends Reducer<Text, Text, Text, Node> {
     @Override
     protected void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
         Node node = new Node(true);
-        node.setRank(0.0);
+        node.setRank(-1.0);
         for (Text value : values) {
             node.addNeighbour(value.toString());
         }
