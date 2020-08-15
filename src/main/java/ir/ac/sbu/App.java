@@ -30,7 +30,7 @@ public class App {
                 conf.setDouble(keyValue[0], Double.parseDouble(keyValue[1]));
             }
         }
-        Job initialize = Job.getInstance(conf, "PreProcess");
+        Job initialize = Job.getInstance(conf, "pagerank-PreProcess");
         initialize.setMapperClass(MapEdges.class);
         //initialize.setCombinerClass(PreReducer.class);
         initialize.setReducerClass(PreReducer.class);
@@ -49,7 +49,7 @@ public class App {
         int iterations = (int) conf.getDouble("iterations" , 1);
 
         for (int i = 0; i < iterations ; i++) {
-                Job pagerank = Job.getInstance(conf, "iteration "+(i+1));
+                Job pagerank = Job.getInstance(conf, "pagerank-iteration "+(i+1));
                 pagerank.setMapperClass(AlgorithmMapper.class);
                 //pagerank.setCombinerClass(AlgorithmReducer.class);
                 pagerank.setReducerClass(AlgorithmReducer.class);
@@ -66,7 +66,7 @@ public class App {
 
         }
 
-        Job sorting = Job.getInstance(conf, "Sorter");
+        Job sorting = Job.getInstance(conf, "pagerank-Sorter");
         sorting.setMapperClass(SortMapper.class);
         //sorting.setCombinerClass(SortReducer.class);
         sorting.setReducerClass(SortReducer.class);
