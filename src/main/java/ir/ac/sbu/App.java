@@ -60,7 +60,7 @@ public class App {
                 pagerank.setJar("pagerank.jar");
                 FileInputFormat.addInputPath(pagerank, new Path("/pagerank/output/"+(i)));
                 FileOutputFormat.setOutputPath(pagerank, new Path("/pagerank/output/"+(i+1)));
-                lastJobComplete = initialize.waitForCompletion(true);
+                lastJobComplete = pagerank.waitForCompletion(true);
                 if(!lastJobComplete)
                     System.exit(1);
 
@@ -78,7 +78,7 @@ public class App {
         sorting.setJar("pagerank.jar");
         FileInputFormat.addInputPath(sorting, new Path("/pagerank/output/"+(iterations)));
         FileOutputFormat.setOutputPath(sorting, new Path("/pagerank/output/result"));
-        lastJobComplete = initialize.waitForCompletion(true);
+        lastJobComplete = sorting.waitForCompletion(true);
         if(!lastJobComplete)
             System.exit(1);
 
