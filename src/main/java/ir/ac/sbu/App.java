@@ -14,7 +14,9 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 
 import java.io.IOException;
 
@@ -32,6 +34,7 @@ public class App {
         initialize.setMapperClass(MapEdges.class);
         //initialize.setCombinerClass(PreReducer.class);
         initialize.setReducerClass(PreReducer.class);
+        initialize.setOutputFormatClass(SequenceFileOutputFormat.class);
         initialize.setOutputKeyClass(Text.class);
         initialize.setOutputValueClass(Node.class);
         initialize.setMapOutputValueClass(Text.class);
@@ -50,6 +53,8 @@ public class App {
                 pagerank.setMapperClass(AlgorithmMapper.class);
                 //pagerank.setCombinerClass(AlgorithmReducer.class);
                 pagerank.setReducerClass(AlgorithmReducer.class);
+                pagerank.setInputFormatClass(SequenceFileInputFormat.class);
+                pagerank.setOutputFormatClass(SequenceFileOutputFormat.class);
                 pagerank.setOutputKeyClass(Text.class);
                 pagerank.setOutputValueClass(Node.class);
                 pagerank.setJar("pagerank.jar");
@@ -65,6 +70,7 @@ public class App {
         sorting.setMapperClass(SortMapper.class);
         //sorting.setCombinerClass(SortReducer.class);
         sorting.setReducerClass(SortReducer.class);
+        sorting.setInputFormatClass(SequenceFileInputFormat.class);
         sorting.setOutputKeyClass(Text.class);
         sorting.setOutputValueClass(DoubleWritable.class);
         sorting.setMapOutputKeyClass(DoubleWritable.class);
