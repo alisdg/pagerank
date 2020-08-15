@@ -76,10 +76,10 @@ public class Node implements WritableComparable<Node> {
         IntWritable intWritable = new IntWritable();
         intWritable.readFields(in);
         int count = intWritable.get();
+        setNeighbours(new ArrayList<>());
         for (int i = 0; i < count; i++) {
             Text link = new Text();
             link.readFields(in);
-            setNeighbours(new ArrayList<>());
             neighbours.add(link.toString());
         }
     }
