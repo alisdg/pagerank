@@ -13,7 +13,6 @@ public class AlgorithmReducer extends Reducer<Text, Node, Text, Node> {
     protected void reduce(Text key, Iterable<Node> values, Context context) throws IOException, InterruptedException {
 //        double dampingFactor = context.getConfiguration().getDouble("damp", 0.85);
 //        double contributions = 0.0;
-//        double pageRank;
 //        Node primary = new Node(true);
 //
 //        for (Node val : values) {
@@ -26,12 +25,13 @@ public class AlgorithmReducer extends Reducer<Text, Node, Text, Node> {
 //        }
 //
 //        //Compute new page rank
-//        pageRank = (1.0 - dampingFactor) + (dampingFactor * contributions);
+//        double pageRank = (1.0 - dampingFactor) + (dampingFactor * contributions);
 //        primary.setRank(pageRank)
 //        context.write(key, primary);
 
         for (Node val : values) {
-            context.write(key,val);
+            if (val.isProcessing())
+                context.write(key,val);
         }
     }
 }
