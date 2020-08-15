@@ -5,6 +5,8 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AlgorithmReducer extends Reducer<Text, Node, Text, Node> {
     @Override
@@ -13,7 +15,13 @@ public class AlgorithmReducer extends Reducer<Text, Node, Text, Node> {
         double contributions = 0.0;
         double pageRank;
         Node primary = new Node(true);
-
+        List<String> lll = new ArrayList<>();
+        lll.add("o");
+        lll.add("o");
+        lll.add("o");
+        lll.add("o");
+        lll.add("o");
+        primary.setNeighbours(lll);
         for (Node val : values) {
             if(val.isProcessing()) {
                 primary = val ;

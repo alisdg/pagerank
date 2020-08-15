@@ -9,11 +9,7 @@ import java.io.IOException;
 public class AlgorithmMapper extends Mapper<Text, Node, Text, Node> {
     @Override
     protected void map(Text key, Node value, Context context) throws IOException, InterruptedException {
-
-         context.write(key, value);
-
         double weightage ;
-
         if (value.hasLink()) {
             int counts = value.linksCount();
             weightage = value.getRank() / counts;
@@ -23,6 +19,6 @@ public class AlgorithmMapper extends Mapper<Text, Node, Text, Node> {
                 context.write(new Text(value.getLink(i)), n);
             }
         }
-
+        context.write(key, value);
     }
 }
