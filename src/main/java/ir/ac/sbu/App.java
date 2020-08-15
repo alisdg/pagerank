@@ -72,8 +72,8 @@ public class App {
         sorting.setReducerClass(SortReducer.class);
         sorting.setInputFormatClass(SequenceFileInputFormat.class);
         sorting.setOutputKeyClass(Text.class);
-        sorting.setOutputValueClass(DoubleWritable.class);
-        sorting.setMapOutputKeyClass(DoubleWritable.class);
+        sorting.setOutputValueClass(Text.class);
+        sorting.setMapOutputKeyClass(Text.class);
         sorting.setMapOutputValueClass(Text.class);
         sorting.setJar("pagerank.jar");
         FileInputFormat.addInputPath(sorting, new Path("/pagerank/output/"+(iterations)));

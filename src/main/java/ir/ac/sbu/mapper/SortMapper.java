@@ -7,10 +7,10 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
-public class SortMapper extends Mapper<Text, Node, DoubleWritable, Text> {
+public class SortMapper extends Mapper<Text, Node, Text, Text> {
     @Override
     protected void map(Text key, Node value, Context context) throws IOException, InterruptedException {
-        double pr = value.getRank();
-        context.write(new DoubleWritable(-1*pr),key);
+        String ss = value.toString();
+        context.write(key,new Text(ss));
     }
 }
