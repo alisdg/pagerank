@@ -34,6 +34,7 @@ public class App {
         initialize.setReducerClass(PreReducer.class);
         initialize.setOutputKeyClass(Text.class);
         initialize.setOutputValueClass(Node.class);
+        initialize.setMapOutputValueClass(Text.class);
         initialize.setJar("pagerank.jar");
         FileInputFormat.addInputPath(initialize, new Path("/pagerank/input/facebook"));
         FileOutputFormat.setOutputPath(initialize, new Path("/pagerank/output/0"));
@@ -66,6 +67,8 @@ public class App {
         sorting.setReducerClass(SortReducer.class);
         sorting.setOutputKeyClass(Text.class);
         sorting.setOutputValueClass(DoubleWritable.class);
+        sorting.setMapOutputKeyClass(DoubleWritable.class);
+        sorting.setMapOutputValueClass(Text.class);
         sorting.setJar("pagerank.jar");
         FileInputFormat.addInputPath(initialize, new Path("/pagerank/output/"+(iterations)));
         FileOutputFormat.setOutputPath(initialize, new Path("/pagerank/output/result"));

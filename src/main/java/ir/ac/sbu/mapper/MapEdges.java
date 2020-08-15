@@ -9,8 +9,8 @@ public class MapEdges extends Mapper<Object, Text, Text, Text> {
     @Override
     protected void map(Object key, Text value, Context context) throws IOException, InterruptedException {
         String[] valArr = value.toString().split(" ");
-        String from = valArr[0];
-        String to = valArr[1];
+        String from = valArr[0].trim();
+        String to = valArr[1].trim();
         context.write(new Text(from), new Text(to));
     }
 }
