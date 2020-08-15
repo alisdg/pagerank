@@ -21,7 +21,7 @@ public class AlgorithmReducer extends Reducer<Text, Node, Text, Node> {
                 primary = val ;
                 continue;
             }
-            contributions += -1*val.getRank();
+            contributions += val.getRank();
             context.write(key,val);
         }
 

@@ -12,12 +12,13 @@ public class AlgorithmMapper extends Mapper<Text, Node, Text, Node> {
         double weightage ;
         if (value.hasLink()) {
             int counts = value.linksCount();
-            weightage = value.getRank() / counts;
-            for (int i = 0; i < counts; i++) {
-                Node n = new Node(false);
-                n.setRank(-1*weightage);
-                context.write(new Text(value.getLink(i)), n);
-            }
+//            weightage = value.getRank() / counts;
+//            for (int i = 0; i < counts; i++) {
+//                Node n = new Node(false);
+//                n.setRank(-1*weightage);
+//                context.write(new Text(value.getLink(i).trim()), n);
+//            }
+            value.setRank(counts);
         }
         context.write(key, value);
     }
