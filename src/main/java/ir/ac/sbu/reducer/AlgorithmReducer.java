@@ -15,19 +15,14 @@ public class AlgorithmReducer extends Reducer<Text, Node, Text, Node> {
         double contributions = 0.0;
         double pageRank;
         Node primary = new Node(true);
-        List<String> lll = new ArrayList<>();
-        lll.add("o");
-        lll.add("o");
-        lll.add("o");
-        lll.add("o");
-        lll.add("o");
-        primary.setNeighbours(lll);
+
         for (Node val : values) {
             if(val.isProcessing()) {
                 primary = val ;
                 continue;
             }
-            contributions += val.getRank();
+            contributions += -1*val.getRank();
+            context.write(key,val);
         }
 
         //Compute new page rank

@@ -15,7 +15,7 @@ public class AlgorithmMapper extends Mapper<Text, Node, Text, Node> {
             weightage = value.getRank() / counts;
             for (int i = 0; i < counts; i++) {
                 Node n = new Node(false);
-                n.setRank(weightage);
+                n.setRank(-1*weightage);
                 context.write(new Text(value.getLink(i)), n);
             }
         }
