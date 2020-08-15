@@ -109,4 +109,8 @@ public class Node implements WritableComparable<Node> {
     public int linksCount(){
         return neighbours.size();
     }
+
+    public String getLink(int i){
+        return this.neighbours.get(i);
+    }
 }
