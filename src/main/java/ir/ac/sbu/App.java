@@ -46,7 +46,7 @@ public class App {
         if(!lastJobComplete)
             System.exit(1);
 
-        double iterations = conf.getDouble("iterations" , 1);
+        int iterations = (int) conf.getDouble("iterations" , 1);
 
         for (int i = 0; i < iterations ; i++) {
                 Job pagerank = Job.getInstance(conf, "iteration "+(i+1));
