@@ -31,9 +31,13 @@ public class AlgorithmReducer extends Reducer<Text, Node, Text, Node> {
 
         for (Node val : values) {
             if (val.isProcessing()) {
-                primary = val ;
+                primary.setNeighbours(val.getNeighbours()) ;
+                continue;
             }
+            contributions += val.getRank();
         }
+        double pageRank = (1.0 - dampingFactor) + (dampingFactor * contributions);
+        primary.setRank(pageRank);
         context.write(key,primary);
     }
 }
