@@ -58,8 +58,8 @@ public class App {
                 pagerank.setOutputKeyClass(Text.class);
                 pagerank.setOutputValueClass(Node.class);
                 pagerank.setJar("pagerank.jar");
-                FileInputFormat.addInputPath(initialize, new Path("/pagerank/output/"+(i)));
-                FileOutputFormat.setOutputPath(initialize, new Path("/pagerank/output/"+(i+1)));
+                FileInputFormat.addInputPath(pagerank, new Path("/pagerank/output/"+(i)));
+                FileOutputFormat.setOutputPath(pagerank, new Path("/pagerank/output/"+(i+1)));
                 lastJobComplete = initialize.waitForCompletion(true);
                 if(!lastJobComplete)
                     System.exit(1);
@@ -76,8 +76,8 @@ public class App {
         sorting.setMapOutputKeyClass(DoubleWritable.class);
         sorting.setMapOutputValueClass(Text.class);
         sorting.setJar("pagerank.jar");
-        FileInputFormat.addInputPath(initialize, new Path("/pagerank/output/"+(iterations)));
-        FileOutputFormat.setOutputPath(initialize, new Path("/pagerank/output/result"));
+        FileInputFormat.addInputPath(sorting, new Path("/pagerank/output/"+(iterations)));
+        FileOutputFormat.setOutputPath(sorting, new Path("/pagerank/output/result"));
         lastJobComplete = initialize.waitForCompletion(true);
         if(!lastJobComplete)
             System.exit(1);
