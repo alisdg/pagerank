@@ -93,7 +93,8 @@ public class Node implements WritableComparable<Node> {
                     .append(" ");
         }
         stringBuilder.append(rank);
-        stringBuilder.append("\n");
+        stringBuilder.append(" ");
+        stringBuilder.append(isProcessing);
         return stringBuilder.toString();
     }
 
