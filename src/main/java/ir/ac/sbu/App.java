@@ -66,19 +66,35 @@ public class App {
 
         }
 
-        Job sorting = Job.getInstance(conf, "pagerank-Sorter");
-        sorting.setMapperClass(SortMapper.class);
-        //sorting.setCombinerClass(SortReducer.class);
-        sorting.setReducerClass(SortReducer.class);
-        sorting.setInputFormatClass(SequenceFileInputFormat.class);
-        sorting.setOutputKeyClass(Text.class);
-        sorting.setOutputValueClass(Text.class);
-        sorting.setMapOutputKeyClass(Text.class);
-        sorting.setMapOutputValueClass(Text.class);
-        sorting.setJar("pagerank.jar");
-        FileInputFormat.addInputPath(sorting, new Path("/pagerank/output/"+(iterations)));
-        FileOutputFormat.setOutputPath(sorting, new Path("/pagerank/output/result"));
-        lastJobComplete = sorting.waitForCompletion(true);
+        Job sorter = Job.getInstance(conf, "pagerank-Sorter");
+        sorter.setMapperClass(SortMapper.class);
+        //sorter.setCombinerClass(SortReducer.class);
+        sorter.setReducerClass(SortReducer.class);
+        sorter.setInputFormatClass(SequenceFileInputFormat.class);
+        sorter.setOutputKeyClass(Text.class);
+        sorter.setOutputValueClass(DoubleWritable.class);
+        sorter.setMapOutputKeyClass(DoubleWritable.class);
+        sorter.setMapOutputValueClass(Text.class);
+        sorter.setJar("pagerank.jar");
+        FileInputFormat.addInputPath(sorter, new Path("/pagerank/output/"+(iterations)));
+        FileOutputFormat.setOutputPath(sorter, new Path("/pagerank/output/result"));
+        lastJobComplete = sorter.waitForCompletion(true);
+        if(!lastJobComplete)
+            System.exit(1);
+
+        Job reporter = Job.getInstance(conf, "pagerank-Reporter");
+        reporter.setMapperClass(SortMapper.class);
+        //reporter.setCombinerClass(SortReducer.class);
+        reporter.setReducerClass(SortReducer.class);
+        reporter.setInputFormatClass(SequenceFileInputFormat.class);
+        reporter.setOutputKeyClass(Text.class);
+        reporter.setOutputValueClass(Text.class);
+        reporter.setMapOutputKeyClass(Text.class);
+        reporter.setMapOutputValueClass(Text.class);
+        reporter.setJar("pagerank.jar");
+        FileInputFormat.addInputPath(reporter, new Path("/pagerank/output/"+(iterations)));
+        FileOutputFormat.setOutputPath(reporter, new Path("/pagerank/output/report"));
+        lastJobComplete = reporter.waitForCompletion(true);
         if(!lastJobComplete)
             System.exit(1);
 
